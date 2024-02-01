@@ -11,7 +11,7 @@ import { environment } from './../../environments/environment';
 })
 export class CategoriesService {
 
-  private urlApi = `${environment.API_URL}/api/`;
+  private urlApi = `${environment.API_URL}/api/v1/`;
 
   constructor(
     private httpClient: HttpClient
@@ -23,7 +23,7 @@ export class CategoriesService {
       params = params.set('limit', limit);
       params = params.set('offset', offset);
     }
-
-    return this.httpClient.get<Category[]>(`${this.urlApi}/categories`, { params });
+    console.log(this.urlApi);
+    return this.httpClient.get<Category[]>(`${this.urlApi}categories`, { params });
   }
 }

@@ -3,6 +3,8 @@ export interface User {
     email: string;
     password: string;
     name: string;
+    role: 'customer' | 'admin';
+    avatar: string;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface

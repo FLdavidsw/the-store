@@ -1,0 +1,19 @@
+<div class="page-product">
+    <button (click)="goToBack()">Back</button>
+    <div class="detail" *ngIf="product">
+        <div class="gallery">
+            <ngb-carousel *ngIf="product.images">
+                <ng-template ngbSlide *ngFor="let image of product?.images">
+                    <div class="picsum-img-wrapper">
+                        <img [src]="image" alt="Random first slide" />
+                    </div>
+                </ng-template>
+            </ngb-carousel>
+        </div>
+        <div>
+            <h1>{{ product.title }}</h1>
+            <h2>{{ product.price | currency }}</h2>
+            <h2>{{ product.description }}</h2>
+        </div>
+    </div>
+</div>

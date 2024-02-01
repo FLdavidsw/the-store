@@ -13,7 +13,7 @@ import { environment } from './../../environments/environment';
 })
 export class ProductsService {
 
-  private urlApi = `${environment.API_URL}/api/`;
+  private urlApi = `${environment.API_URL}/api/v1/`;
 
   //private urlApi = 'https://young-sands-07814.herokuapp.com/api/';
   //Other possible urlApi = https://damp-spire-59848.herokuapp.com/docs
@@ -47,7 +47,6 @@ export class ProductsService {
       map(products => products.map(item => {
         return {
           ...item,
-          images: ['https://loremflickr.com/320/240?random=1'],
           taxes: .19 * item.price
         }
       }))
@@ -67,7 +66,6 @@ export class ProductsService {
       map(products => products.map(item => {
         return {
           ...item,
-          images: ['https://loremflickr.com/320/240?random=1'],
           taxes: .19 * item.price
         }
       }))
@@ -85,10 +83,10 @@ export class ProductsService {
   getProduct(id: string) {
     return this.http.get<Product>(`${this.urlApi}products/${id}`)
     .pipe(
-      map(product => {
+     /* map(product => {
        product['images'] = ['https://loremflickr.com/320/240?random=1','https://loremflickr.com/320/240?random=2']
        return product;
-      }),
+      }),*/
       catchError((error: HttpErrorResponse) => {
         if (error.status === 500) {
           return throwError(() => new Error ('Algo esta fallando en el server'));

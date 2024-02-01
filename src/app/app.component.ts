@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { AuthService } from './services/auth.service';
 import { UsersService } from './services/users.service';
+import { TokenService } from './services/token.service';
 import { FilesService } from './services/files.service';
 
 import { User } from './models/user.model';
@@ -10,7 +11,7 @@ import { User } from './models/user.model';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'the-store';
   imgParent = 'https://pictures.betaseries.com/fonds/poster/d58a6bd95b4ec22786ce995660501651.jpg';
   showImg = true;
@@ -22,9 +23,18 @@ export class AppComponent {
   constructor(
     private authService: AuthService,
     private usersService: UsersService,
-    private filesService: FilesService 
+    private filesService: FilesService,
+    private tokenService: TokenService 
   ) {}
   
+    ngOnInit() {
+      const token = this.tokenService.getToken();
+      if (token) {
+        this.authService.getProfile()
+        .subscribe()
+      }
+    }
+
   OnLoaded(img: string) {
     console.log('log padre', img);
   }
@@ -38,7 +48,9 @@ export class AppComponent {
     this.usersService.create({
       name: 'sebas',
       email: 'sebas@mail.com',
-      password: '1212'
+      password: '1212',
+      role: 'customer',
+      avatar: 'sebas12'
     })
     .subscribe(rta => {
       console.log(rta);

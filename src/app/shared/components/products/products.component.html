@@ -1,0 +1,28 @@
+<button (click)="createNewProduct()">create</button>
+<button (click)="onShowDetail('121212')">Detail doesn't exist</button>
+<div class="products--grid">
+    <app-product [product]="product"
+     *ngFor="let product of products"
+     (addedProduct)="OnAddToShoppingCart($event)"
+     (showProduct)="onShowDetail($event)"
+     ></app-product>
+     <button (click)="onLoadMore()">Load more</button>
+</div>
+<div class="product-detail" [class.active]="showProductDetail">
+    {{ statusDetail }}
+    <div *ngIf="productChosen">
+        <button (click)="toggleProductDetail()">Close</button>
+        <h1>{{ productChosen.title }}</h1>
+        <ngb-carousel *ngIf="productChosen.images">
+            <ng-template ngbSlide *ngFor="let image of productChosen?.images">
+                <div class="picsum-img-wrapper">
+                    <img [src]="image" alt="Random first slide" />
+                </div>
+            </ng-template>
+        </ngb-carousel>
+        
+        <p> {{ productChosen.description }}</p>
+        <button (click)="updateProduct()">Editar</button>
+        <button (click)="deleteProduct()">Delete</button>
+    </div>
+</div>
